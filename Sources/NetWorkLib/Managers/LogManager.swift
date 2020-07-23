@@ -1,3 +1,8 @@
+//
+//  Created by TCS.
+//  Copyright © 2020 TCS. All rights reserved.
+//
+
 import Foundation
 
 /// Enum which maps an appropiate symbol which added as prefix for each log message
