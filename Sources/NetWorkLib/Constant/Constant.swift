@@ -5,4 +5,6 @@
 
 import Foundation
 
-public class Constant {}
+public enum ResponseType: Int {
+   case news = 1, weather
+}
