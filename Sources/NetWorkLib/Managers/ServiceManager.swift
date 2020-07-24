@@ -21,6 +21,7 @@ public extension ServiceManager {
         let parse: (Data) -> T?
     }
     
+    /// Load genric resources
     func load<T>(_ resource: Resource<T>, completion: @escaping (T?) -> Void) {
         URLSession.shared.dataTask(with: resource.url) { data, response, error in
             if let data = data {
