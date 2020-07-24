@@ -6,7 +6,11 @@
 import Foundation
 
 public struct Resource<T> {
-    public init() {}
+    public init(url: URL, parse: @escaping (Data) -> T?) {
+        self.url = url
+        self.parse = parse
+    }
+    
     public let url: URL
     public let parse: (Data) -> T?
 }
