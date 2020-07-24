@@ -27,14 +27,14 @@ public class ServiceManager {
 public extension ServiceManager {
     
     /// Load genric resources
-    func load<T>(_ resource: Resource<T>, completion: @escaping (T?) -> Void) {
+    func load<T>(_ resource: Resource<T>, completion:@escaping(Swift.Result<T?, ErrorModel>) -> Void) {
         URLSession.shared.dataTask(with: resource.url) { data, response, error in
             if let data = data {
                 DispatchQueue.main.async {
-                    completion(resource.parse(data))
+                    completion(Result.success(resource.parse(data)))
                 }
             } else {
-                completion(nil)
+               completion(Result.failure(ErrorModel.generalError()))
             }
         }
         .resume()
