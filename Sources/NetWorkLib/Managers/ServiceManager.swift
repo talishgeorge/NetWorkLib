@@ -65,30 +65,4 @@ public extension ServiceManager {
         }
         .resume()
     }
-    
-    func sendWeatherRequest<T: Decodable>(request: RequestModel, completion: @escaping(Swift.Result<T, ErrorModel>) -> Void) {
-        if request.isLoggingEnabled.0 {
-            LogManager.req(request)
-        }
-        URLSession.shared.dataTask(with: request.urlRequest()) { data, response, error in
-            guard let data = data, var responseModel = try? JSONDecoder().decode(WeatherResponseModel<T>.self, from: data), let model = try? JSONDecoder().decode(T.self, from: data) else {
-                let error: ErrorModel = ErrorModel(ErrorKey.parsing.rawValue)
-                LogManager.err(error)
-                completion(Result.failure(error))
-                return
-            }
-            responseModel.rawData = data
-            responseModel.request = request
-            responseModel.data = model
-            if request.isLoggingEnabled.1 {
-                //LogManager.res(responseModel)
-            }
-            if let data = responseModel.data {
-                completion(Result.success(data))
-            } else {
-                completion(Result.failure(ErrorModel.generalError()))
-            }
-        }
-        .resume()
-    }
 }
