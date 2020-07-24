@@ -6,6 +6,7 @@
 import Foundation
 
 public struct Resource<T> {
+    public init() {}
     public let url: URL
     public let parse: (Data) -> T?
 }
