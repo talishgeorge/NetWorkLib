@@ -6,8 +6,8 @@
 import Foundation
 
 public struct Resource<T> {
-    let url: URL
-    let parse: (Data) -> T?
+    public let url: URL
+    public let parse: (Data) -> T?
 }
 
 public class ServiceManager {
