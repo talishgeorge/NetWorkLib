@@ -5,6 +5,11 @@
 
 import Foundation
 
+public struct Resource<T> {
+    let url: URL
+    let parse: (Data) -> T?
+}
+
 public class ServiceManager {
     
     // MARK: - Properties
@@ -15,11 +20,6 @@ public class ServiceManager {
 // MARK: - Public Functions
 
 public extension ServiceManager {
-    
-    struct Resource<T> {
-        let url: URL
-        let parse: (Data) -> T?
-    }
     
     /// Load genric resources
     func load<T>(_ resource: Resource<T>, completion: @escaping (T?) -> Void) {
